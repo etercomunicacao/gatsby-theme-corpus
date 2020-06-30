@@ -1,4 +1,5 @@
 import React from "react";
+import Hero from "./sections/hero"
 
 // Components
 import Layout from "../components/layout";
@@ -8,9 +9,10 @@ import SEO from "../components/seo";
 import '../styles/site.scss';
 import '../styles/layout.scss';
 
-const IndexPage = () => (
+const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
+    <Hero data={ data } />
     <h1 className="m-0 text-4xl text-center">
       Another Todo 
     </h1>

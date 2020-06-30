@@ -9,6 +9,7 @@ The demo site for this project can be found [here](https://userbase-gatsby-start
 ## Getting Started
 
 Assuming that you already have gatsby installed, install the Userbase Gatsby Starter:
+
 ```
 gatsby new userbase-gatsby https://github.com/jneterer/userbase-gatsby-starter
 ```
@@ -28,5 +29,7 @@ require("dotenv").config({
   path: `.env`,
 })
 ```
+
 ## Thanks!
+
 Thank you for trying out my Userbase Gatsby Starter project! You can find me here: [My Site](https://jacobneterer.com), [Twitter](https://twitter.com/jacobneterer), and [LinkedIn](https://www.linkedin.com/in/jacobneterer).

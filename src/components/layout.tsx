@@ -17,13 +17,13 @@ const Layout = ({ children, ...rest }) => {
     }
   `)
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} {...rest} />
-      <div className="top-20 relative sm:px-20 px-10 py-10">
+    <div className="border-t-8 border-corpus-blue-600">
+      
+      <div className="relative overflow-x-hidden">
         <main>{children}</main>
         <Footer />
       </div>
-    </>
+    </div>
   )
 }
 
