@@ -3,7 +3,7 @@ require("dotenv").config({
 })
 
 const myCustomQueries = {
-  lg: '(min-width: 1024px)'
+  lg: "(min-width: 1024px)",
 }
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `rubik\:300,300i,400,400i,700, 700i`,
+          `rubik\:200,200i,300,300i,400,400i,,600,600i,700, 700i`,
           `Open+Sans\:300,300i,400,400i,700, 700i`,
         ],
         display: "swap",
@@ -57,14 +57,14 @@ module.exports = {
       resolve: "gatsby-background-image-es5",
       options: {
         // add your own characters to escape, replacing the default ':/'
-        specialChars: "/:",
+        specialChars: ":/",
       },
     },
     {
       resolve: "gatsby-plugin-breakpoints",
-        options: {
-            queries: myCustomQueries,
-        },
+      options: {
+        queries: myCustomQueries,
+      },
     },
     `gatsby-plugin-typescript`,
     {

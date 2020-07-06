@@ -1,9 +1,29 @@
-#navbar {
-  .dropdown {
-    &:hover .dropdown-menu {
-      display: block;
+#heroNav {
+  #navbar {
+    a {
+      transition-delay: .3s;
+      transition-timing-function: ease-in-out;
     }
+    .dropdown {
+      .dropdown-menu {
+       
+      }
+      &:hover .dropdown-menu {
+        display: block;
+        transition-delay: .3s;
+        transition-timing-function: ease-in-out;
+      }
+    }
+    
+  }
+}
+
+
+body { 
+  &:before {
+    background-color: #003D5C;
+
+    height: 100%;
   }
   
 }
-

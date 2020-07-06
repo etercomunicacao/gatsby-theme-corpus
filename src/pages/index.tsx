@@ -1,5 +1,7 @@
 import React from "react";
 import Hero from "./sections/hero"
+import Fisioterapia  from "./sections/fisioterapia"
+import Pilates from "./sections/pilates";
 
 // Components
 import Layout from "../components/layout";
@@ -9,18 +11,13 @@ import SEO from "../components/seo";
 import '../styles/site.scss';
 import '../styles/layout.scss';
 
+
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
     <Hero data={ data } />
-    <h1 className="m-0 text-4xl text-center">
-      Another Todo 
-    </h1>
-    <p>
-      Built using the exciting new serverless JavaScript
-      {` `}SDK <a className="link" href="https://userbase.com/" target="_blank" rel="noopener noreferrer">Userbase</a>.
-    </p>
-    <p>You can read how to set up this Userbase Gatsby Starter here: <a className="link" href="https://github.com/jneterer/userbase-gatsby-starter/blob/master/README.md" target="_blank" rel="noopener noreferrer">README</a>.</p>
+    <Fisioterapia data={ data } />
+    <Pilates data={ data } />
   </Layout>
 )
 

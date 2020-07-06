@@ -9,6 +9,11 @@
 @import './forms.scss';
 @import './auth.scss';
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 // Default anchor style
 a {
   &.link {

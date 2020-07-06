@@ -1,23 +1,26 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
-
-import styled from 'styled-components'
-import BackgroundImage from "gatsby-background-image"
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import Img from "gatsby-image"
+// Components
+import SectionWithBackground from "../../components/backgroundModule"
+import RichText from "../../components/richTextRenderer"
+// Utilities
+import ReactTypingEffect from "react-typing-effect"
+// StylingR
+import "./styles.scss"
 import Lupa from "../../images/svg/icon/lupa"
 
 export default function Hero(props) {
 
   const data = useStaticQuery(graphql`
     query HeroQuery {
-      contentfulPagina(
+      Hero:contentfulPagina(
         id: {
           eq: "17b61d2f-12f7-5a44-b5f0-d21702b646ed"
         }
       ) {
-      id
       imagemDestaque {
-        fluid {
+        fluid(quality: 10) {
           srcSet
         }
       }
@@ -28,11 +31,18 @@ export default function Hero(props) {
         }
       slug
       titulo
-      conteudo {
-        conteudo
+      content {
+        json
       }
     }
-    contentfulImagensIdv(id: { eq: "141b3598-e36d-5380-8c12-4adc60a41b50" } ) {
+    contentfulHeroDigitacao {
+      lista
+    }
+    contentfulImagensIdv(
+      id: { 
+        eq: "141b3598-e36d-5380-8c12-4adc60a41b50" 
+      } 
+    ) {
       arquivo {
         fluid(maxWidth: 500) {
           srcSetWebp
@@ -47,96 +57,83 @@ export default function Hero(props) {
   }
   `)
 
-  const HeroSection = ({ className, data, children }) => {
-    const breakpoints = useBreakpoint();
-
-    return (
-      <BackgroundImage
-        Tag="section"
-        className={`${className} relative w-full min-h-screen bg-cover bg-bottom-center text-red-500 bg-opacity-0 lg:bg-opacity-100 lg:text-gray-800`}
-        fluid={data.contentfulPagina.imagemDestaque.fluid}
-        id="hero"
-      >
-        {children}
-      </BackgroundImage>  
-    )
-  }
-
-  const StyledHeroSection = styled(HeroSection)`  
-  
-  `;
-  
-  const { site, contentfulImagensIdv} = data
+  const { contentfulImagensIdv, Hero, contentfulHeroDigitacao} = data
+  const { content } = Hero
+  const { lista } = contentfulHeroDigitacao
 
   return (
-    <div className={props.className}>
-      <StyledHeroSection data={data}> 
-        <nav className="container mx-auto flex hidden lg:block sm:flex-row flex-wrap justify-around sm:justify-between items-center px-1 sm:px-20">
-          <Link
-            to="/"
-            style={{
-              color: `white`,
-              textDecoration: `none`,
-            }}
-          >
-          </Link>
+      
+    <SectionWithBackground 
+      fluidBkg={Hero.imagemDestaque.fluid} 
+      contentClassName="flex lg:flex-wrap px-10 md:px-0 h-screen lg:h-auto" 
+      bkgClassName="absolute z-0 w-full h-full top-0 lg:block hidden"
+      >
 
-          <div class="block lg:hidden ml-auto">
-            <button class="flex items-center px-3 py-2 border rounded text-corpus-blue-500 border-teal-light hover:text-white hover:border-white">
-              <svg class="h-3 w-3 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-              </svg>
-            </button>
-          </div>
+      <div className="hidden lg:block w-full">
+        <nav id="heroNav" className="flex items-center py-6 w-full">
+          <Link
+          to="/"
+          className=" mr-auto"
+          >
+            <Img fluid={contentfulImagensIdv.arquivo.fluid} className="w-32 h-24" />
+          </Link>
           
-          <ul className="flex flex-col lg:flex-row lg:inline-flex mx-auto font-display font-light uppercase">
-            <li><Link to="" className="mr-6 text-corpus-blue-600 hover:text-corpus-orange-600">Início</Link></li>
-            <li className="dropdown"><Link to="" className="relative mr-6 text-corpus-blue-600 hover:text-corpus-orange-600"><span></span> Fisioterapia</Link>
-              <ul className="dropdown-menu hidden absolute pt-0">
-                <li className=""><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Obstétrica</Link></li>
-                <li className=""><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Pélvica</Link></li>
-                <li className=""><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Ortopédica</Link></li>
+          
+          <ul id="navbar" className="navbar flex flex-row font-display font-light uppercase mx-auto">
+            <li><Link to="" className="mx-3 text-corpus-blue-600 hover:text-corpus-orange-600">Início</Link></li>
+            <li className="dropdown"><Link to="/#fisioterapia" className="relative mx-3 text-corpus-blue-600 hover:text-corpus-orange-600"><span></span> Fisioterapia</Link>
+              <ul className="dropdown-menu absolute hidden bg-white border-1 border-corpus-orange-100 px-3 py-2 shadow">
+                <li className="py-1"><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Obstétrica</Link></li>
+                <li className="py-1"><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Pélvica</Link></li>
+                <li className="py-1"><Link to="" className="text-corpus-blue-600 hover:text-corpus-orange-600">Ortopédica</Link></li>
               </ul>
             </li>
-            <li><Link to="" className="mr-6 text-corpus-blue-600 hover:text-corpus-orange-600">Pilates</Link></li>
-            <li><Link to="" className="mr-6 text-corpus-blue-600 hover:text-corpus-orange-600">Sobre</Link></li>
-            <li><Link to="" className="mr-6 text-corpus-blue-600 hover:text-corpus-orange-600">Blog</Link></li>
-            <li><Link to="" className="mr-6 text-corpus-blue-600 hover:text-corpus-orange-600">Contato</Link></li>
+            <li><Link to="" className="mx-3 text-corpus-blue-600 hover:text-corpus-orange-600">Pilates</Link></li>
+            <li><Link to="" className="mx-3 text-corpus-blue-600 hover:text-corpus-orange-600">Sobre</Link></li>
+            <li><Link to="" className="mx-3 text-corpus-blue-600 hover:text-corpus-orange-600">Blog</Link></li>
+            <li><Link to="" className="mx-3 text-corpus-blue-600 hover:text-corpus-orange-600">Contato</Link></li>
           </ul>
-        
           
-          <div class="pt-2 relative text-gray-600">
-            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg font-body text-sm"
-              type="search" name="search" placeholder="Buscar" />
-            <button type="submit" class="absolute right-0 z-20 top-0 mt-3 -ml-6 text-corpus-blue-400 hover:text-corpus-orange-400">
+          
+          
+          
+          <div class="relative text-gray-600 ml-auto ">
+            <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg font-body text-sm focus:shadow-corpus-orange-500"
+            type="search" name="search" placeholder="Buscar" />
+            <button type="submit" class="absolute right-0 z-20 top-0 mt-3 mr-3 text-corpus-blue-400 hover:text-corpus-orange-400">
               <Lupa className="w-4 h-4" />
             </button>
           </div>
         </nav>
-
-        <div className="container flex flex-wrap mx-auto">
-          <div className="w-1/2 mr-auto">
-            <p>
-              Sint consectetur amet quis sint ea eu. Irure minim quis sit eu. Id ipsum aliqua labore qui sint ullamco nulla qui incididunt tempor qui. Commodo mollit enim id aute eu veniam eu Lorem adipisicing. Sint in velit pariatur et pariatur culpa eu et pariatur quis ullamco anim ea dolor. Excepteur sint officia qui minim esse commodo est officia est nulla anim minim non exercitation.
-            </p>
-
-            <p>
-              Cupidatat reprehenderit anim ea minim voluptate eiusmod reprehenderit nisi elit. Commodo cillum laboris duis enim irure ullamco. Nulla non laboris non incididunt non consequat anim pariatur voluptate ad anim occaecat sit.
-            </p>
-
-            <p>
-              Minim ullamco laboris velit ullamco deserunt proident consequat consequat est anim pariatur. Lorem elit culpa officia amet ut aliqua Lorem adipisicing aliqua pariatur commodo. Aliquip est pariatur ut sunt officia nulla qui aliqua magna. Laboris anim laboris qui irure adipisicing aliqua enim ex reprehenderit qui sint.
-            </p>
-
-            <p>
-              Labore voluptate quis elit elit Lorem ad sit proident velit sint voluptate in nostrud. Eiusmod Lorem exercitation velit est incididunt tempor irure amet excepteur labore. Ullamco laboris commodo irure fugiat eu cupidatat non adipisicing magna amet exercitation.
-            </p>
-
+      </div>
+        
+      <div className="w-full h-auto self-center lg:self-auto flex flex-col items-center lg:h-full lg:py-40">
+        <div className="lg:hidden w-full ">
+          <Img fluid={Hero.destaqueResponsivo.fluid} className="w-full pb-2/3" />
+        </div>
+        <div className="lg:w-2/5 lg:mr-auto">
+          <p className="md:w-full text-justify lg:text-left lg:w-3/4 flex-grow-0 flex-shrink-0 -ml-1 font-display tracking-tighter trac leading-tighter font-light text-4xl md:text-5xl lg:text-6xl text-corpus-blue-500 ">Por uma vida mais 
+            <ReactTypingEffect className="font-bold ml-2 lg:ml-4" text={lista} speed={300} eraseDelay={1300} typingDelay={500} />
+          </p>
+          <div id="RichText" className="w-full flex-1 font-body text-lg mt-4">
+            <RichText input={content} />  
           </div>
         </div>
-      </StyledHeroSection>
-    </div>
+      </div>
+      
+      <a id="anchorBtn" className="animate__fadeInDown" href="/#fisioterapia">
+        <div className="w-20 h-16 hidden lg:block absolute bottom-0 left-1/2 -ml-10 mb-40">
+          <span className="uppercase text-lg text-center font-display tracking-widest font-thin text-corpus-blue-600 mx-2">Rolar</span>
+          <div id="arrow" className="-mt-3 w-6 mx-auto">
+          <div className="w-6 h-6 border-b-1 border-l-1 border-corpus-blue-500 transform -rotate-45"></div>
+          </div>
+        </div>
+      </a>
+      
+      
+        
+        
+    </SectionWithBackground>
   )
 }
 

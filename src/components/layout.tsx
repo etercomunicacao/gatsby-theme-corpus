@@ -17,7 +17,7 @@ const Layout = ({ children, ...rest }) => {
     }
   `)
   return (
-    <div className="border-t-8 border-corpus-blue-600">
+    <div className="border-t-8 border-corpus-blue-500">
       
       <div className="relative overflow-x-hidden">
         <main>{children}</main>
