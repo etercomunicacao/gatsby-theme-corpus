@@ -85,9 +85,8 @@ a#anchorBtn {
 }
 
 #spacer {
-  @apply w-screen h-64;
   clip-path: polygon(0% 0%, 0% 100%, 100% 00%);
-  background-color: white;
+  
   
 }
 
@@ -97,6 +96,15 @@ a#anchorBtn {
     padding-bottom: 85%;
   }
   
+  .chamada {
+
+    p {
+      @media (min-width: 768px) { @apply text-left; }
+      @apply text-justify;
+      
+    }
+  }
+
   a {
     @apply relative text-corpus-blue-500;
     z-index: 500;

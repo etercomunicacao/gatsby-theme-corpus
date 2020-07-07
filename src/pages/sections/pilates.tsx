@@ -39,15 +39,15 @@ export default function Pilates(props) {
  
 
   return (
-    <section id="pilates" className="relative w-full h-auto bg-corpus-baby-blue-200">
-      <div id="spacer" className="bg-corpus-baby-blue-200 absolute z-0 inset-x-0 top-0" />
-      <div className="pilates_image absolute top-0 -right-2.5 w-2/3 z-30 -mt-12 ">
+    <section id="pilates" className="flex flex-col lg:flex-none relative w-full h-auto bg-corpus-baby-blue-200 lg:-mt-32">
+      <div id="spacer" className="bg-white order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
+      <div className="pilates_image lg:absolute top-0 -right-2.5 w-4/5 mx-auto lg:mx-0 lg:w-2/3 z-30 lg:-mt-12 order-3 ">
         <Img fluid={fluid} draggable="false" className="" />
       </div>
-      <div className="container mx-auto py-64">
-        <div className="chamada text-left lg:w-1/3 lg:mr-auto lg:mb-10">
+      <div className="container mx-auto pt-10 lg:py-64 order-2">
+        <div className="chamada lg:text-left lg:w-1/3 lg:mr-auto lg:mb-10">
           <h2 className="font-display font-base leading-tighter text-5xl text-corpus-blue-600 -ml-1 mb-3">{titulo}</h2>
-          <RichText input={content} />
+          <RichText input={content} className="texto" />
         </div>
       </div>
         

@@ -10,6 +10,7 @@ import SEO from "../components/seo";
 // Styles
 import '../styles/site.scss';
 import '../styles/layout.scss';
+import BlogFrontPage from "./sections/blog-front";
 
 
 const IndexPage = ({ data }) => (
@@ -18,6 +19,7 @@ const IndexPage = ({ data }) => (
     <Hero data={ data } />
     <Fisioterapia data={ data } />
     <Pilates data={ data } />
+    <BlogFrontPage data={ data } />
   </Layout>
 )
 
