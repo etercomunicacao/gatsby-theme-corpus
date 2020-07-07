@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 // Utilities
 import RichText from "../../components/richTextRenderer"
-
+import kebabCase from "lodash/kebabCase"
 // Styling
 import "./styles.scss"
 
@@ -53,35 +53,41 @@ export default function BlogFrontPage(props) {
     <section id="blog" className="blog blog__frontpage relative w-screen h-auto py-64 bg-corpus-grayish-blue-800 ">
       <div id="spacer" className="bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
       <div className="container mx-auto">
-      <h1 className="font-display text-4xl text-corpus-beige-300 font-thin ml-6 w-full">Blog da Corpus</h1>
-      <div className="flex flex-row mt-10 w-full">
-      {Posts.edges.map(({ node }, i) => {
-      const {
-      id,
-      slug,
-      titulo,
-      excerpt,
-      imagemDestaque
-      } = node
-      const { fluid } = imagemDestaque.arquivo
-      
-      return (
-        <Link to={`/blog/${slug}`} className="w-1/3 mx-6 h-auto ">
-          <div className={`bg-white class_${id} w-full h-full relative`} key={i} id={slug}>
-            <div className="w-full h-64 object-cover">
-              <Img fluid={fluid} className="w-full h-full" />
+        <h1 className="font-display text-4xl text-corpus-beige-300 font-thin ml-6 w-full">Blog da Corpus</h1>
+        <div className="flex flex-row mt-10 w-full">
+        {Posts.edges.map(({ node }, i) => {
+        const {
+        id,
+        slug,
+        titulo,
+        excerpt,
+        imagemDestaque
+        } = node
+        const { fluid } = imagemDestaque.arquivo
+        
+        return (
+          <Link to={`/blog/${slug}`} className="w-1/3 mx-6 h-auto ">
+            <div className={`bg-white class_${id} w-full h-full relative`} key={i} id={slug}>
+              <div className="w-full h-64 object-cover">
+                <Img fluid={fluid} className="w-full h-full" />
+              </div>
+              <div className="w-full h-full px-5 py-3">
+                <ul className="inline-flex">
+                  {Posts.group.map(categoria => {
+                    return <li className="block text-black"><Link to={`/categorias/${kebabCase(categoria.fieldValue)}/`}>{categoria.nome}</Link></li>
+                  })}
+                </ul>
+                <h2 className="font-display text-corpus-blue-500 text-xl">{titulo}</h2>
+                <RichText input={excerpt} />
+                <span className="ml-auto mt-auto uppercase font-display font-semibold text-corpus-grayish-blue-400 w-1/3 ">Leia Mais</span>
+              </div>
             </div>
-            <div className="w-full h-full flex flex-wrap content-between px-5 py-3">
-              <h2 className="font-display text-corpus-blue-500 text-xl">{titulo}</h2>
-              <RichText input={excerpt} />
-              <span className="ml-auto mt-auto uppercase font-display font-semibold text-corpus-grayish-blue-400 w-1/3 ">Leia Mais</span>
-            </div>
-          </div>
-        </Link>
-      )
-      })}
-      
-      </div></div>
+          </Link>
+        )
+        })}
+        
+        </div>
+      </div>
     </section>
   )
 
