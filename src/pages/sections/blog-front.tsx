@@ -20,18 +20,19 @@ export default function BlogFrontPage(props) {
           fields: dataHora
         }
       ) {
-        group(
-          field: categorias___nome, 
-          limit: 1
-        ) {
-          fieldValue
-        }
         edges {
           node {
-            id
             slug
             titulo
             dataHora(formatString: "MMMM, YYYY", locale: "pt-br")
+            categorias {
+              nome
+              slug
+            }
+            autor {
+              nome
+              slug
+            }
             imagemDestaque {
               arquivo {
                 fluid {
@@ -51,49 +52,53 @@ export default function BlogFrontPage(props) {
     <section id="blog" className="blog blog__frontpage relative w-screen h-auto py-64 bg-corpus-grayish-blue-800 ">
       <div id="spacer" className="bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
       <div className="container mx-auto">
-        <h1 className="font-display text-4xl text-corpus-beige-300 font-thin ml-6 w-full">Blog da Corpus</h1>
+        <h1 className="font-display font-medium text-4xl text-corpus-beige-300 font-thin ml-6 w-full">Blog da Corpus</h1>
         <div className="mt-10 w-full">
-          <ol className="articles grid grid-cols-3 gap-20 justify-center grid-rows-1">
+          <div className="cards">
             {Posts.edges.map(({ node }, i) => {
 
               const {
-                id,
                 slug,
                 titulo,
                 dataHora,
+                categorias,
+                autor,
                 imagemDestaque
               } = node
               
               const { fluid } = imagemDestaque.arquivo
 
               return (
-                <li className={`articles__article id__${id} cursor-pointer block relative h-auto`} key={i} id={slug} >
-                  <Link className="articles__link" to={`/blog/${slug}/`}>
-                    <Img fluid={fluid} className="w-full h-full" />
-                    <div className="articles__content articles__content--lhs bg-white">
-                      <h2 className="articles__title">{titulo}</h2>
-                      <div className="articles__footer">
-                        {Posts.group.map(categoria => {
-                          return <p><Link to={`/categorias/${kebabCase(categoria.fieldValue)}/`}>{categoria.nome}</Link></p>
-                        })}
-                        <span>{dataHora}</span>
-                      </div>
+                <div className="card">
+                  <h2 className="card__titulo">{titulo}</h2>
+                  <div className="img__holder">
+                    <Link className="img__link" to={`/blog/${slug}`}>
+                      <Img fluid={fluid} className="w-full h-full" />
+                    </Link>
+                  </div>
+                  <div className="card__info">
+                    <div className="card__sobre">
+                      <ul className="card__categorias">
+                          {categorias.map(categoria => {
+                            return <li><Link to={`/categorias/${categoria.slug}/`}>{categoria.nome}</Link></li>
+                          })}
+                      </ul>
+                      <div className="card__data">{dataHora}</div>
                     </div>
-                    <div className="articles__content articles__content--rhs">
-                      <h2 className="articles__title">{titulo}</h2>
-                      <div className="articles__footer">
-                        {Posts.group.map(categoria => {
-                          return <p><Link to={`/categorias/${kebabCase(categoria.fieldValue)}/`}>{categoria.nome}</Link></p>
-                        })}
-                        <span>{dataHora}</span>
-                      </div>
+                    
+                    <div className="card__autor">Por: <Link to={`/autores/${autor.slug}`}>{autor.nome}</Link></div>
+
                     </div>
-                  </Link>
-                </li>
+                    <div className="card__hovered"></div>
+                  </div>
+                
+                        
+                        
+                        
               )
             })}
           
-          </ol>
+          </div>
         
         </div>
       </div>
