@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 
 // Utilities
 import RichText from "../../components/richTextRenderer"
-import kebabCase from "lodash/kebabCase"
+
 // Styling
 import "./styles.scss"
 
@@ -14,7 +14,8 @@ export default function BlogFrontPage(props) {
   const data = useStaticQuery(graphql`
     query BlogFrontQuery {
       Posts:allContentfulBlogPost(
-        limit: 3, 
+        limit:3,
+        skip: 1, 
         sort: {
           order: DESC, 
           fields: dataHora
@@ -24,7 +25,7 @@ export default function BlogFrontPage(props) {
           node {
             slug
             titulo
-            dataHora(formatString: "MMMM, YYYY", locale: "pt-br")
+            dataHora(formatString: "D MMMM, YYYY", locale: "pt-br")
             categorias {
               nome
               slug
@@ -43,17 +44,95 @@ export default function BlogFrontPage(props) {
           }
         }
       }
+      Destaque:allContentfulBlogPost(
+        limit:1,
+        sort: {
+          order: DESC, 
+          fields: dataHora
+        }
+      ) {
+        edges {
+          node {
+            slug
+            titulo
+            dataHora(formatString: "D MMMM, YYYY", locale: "pt-br")
+            categorias {
+              nome
+              slug
+            }
+            excerpt {
+              json
+            }
+            autor {
+              nome
+              slug
+            }
+            imagemDestaque {
+              arquivo {
+                fluid {
+                  srcSet
+                }
+              }
+            }
+          }
+        }
+      }
     }
   `)
 
-  const { Posts } = data
+  const { Posts, Destaque } = data
 
   return (
     <section id="blog" className="blog blog__frontpage relative w-screen h-auto py-64 bg-corpus-grayish-blue-800 ">
-      <div id="spacer" className="bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
+      <div id="spacer" className="shadow-xl bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
       <div className="container mx-auto">
-        <h1 className="font-display font-medium text-4xl text-corpus-beige-300 font-thin ml-6 w-full">Blog da Corpus</h1>
+        <h1 className="font-display font-medium text-4xl text-corpus-beige-300 font-thin w-full text-shadow">Blog da Corpus</h1>
         <div className="mt-10 w-full">
+          <div className="destaque">
+            {Destaque.edges.map(({ node }, i) => {
+
+              const {
+                slug,
+                titulo,
+                dataHora,
+                categorias,
+                excerpt,
+                autor,
+                imagemDestaque
+              } = node
+              
+              const { fluid } = imagemDestaque.arquivo
+
+              return (
+                <div className="post">
+                  <div className="gradient__cover"></div>
+                  <div className="img__holder">
+                    <Link className="img__link">
+                      <Img className="w-full h-full" fluid={fluid}/>
+                    </Link>
+                  </div>
+                  <div className="post__info">
+                    <div className="post__sobre">
+                      <ul className="post__categorias">
+                        {categorias.map(categoria => {
+                          return <li to={`/categorias/${categoria.slug}`}>{categoria.nome}</li>
+                        })}
+                      </ul>
+                      
+                      <div className="post__data">{dataHora}</div>
+                    </div>
+                    <h2 className="post__titulo">{titulo}</h2>
+                    <div className="post__excerpt">
+                      <Link to={`/blog/${slug}/`} className="post__link">
+                        <RichText input={excerpt} />
+                      </Link>
+                    </div>
+                    <div className="post__autor">Por <Link to={`/autor/${autor.slug}`}>{autor.nome}</Link></div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
           <div className="cards">
             {Posts.edges.map(({ node }, i) => {
 

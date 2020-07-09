@@ -12,7 +12,6 @@ import '../styles/site.scss';
 import '../styles/layout.scss';
 import BlogFrontPage from "./sections/blog-front";
 
-
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" />
