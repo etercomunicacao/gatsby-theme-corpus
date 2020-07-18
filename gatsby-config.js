@@ -25,8 +25,8 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `rubik\:200,200i,300,300i,400,400i,,600,600i,700, 700i`,
-          `Open+Sans\:300,300i,400,400i,700, 700i`,
+          `rubik\:200,200i,300,300i,400,400i,500,500i,600,600i,700, 700i`,
+          `Open+Sans\:300,300i,400,400i,700,700i`,
         ],
         display: "swap",
       },
@@ -51,6 +51,34 @@ module.exports = {
         theme_color: `#004466`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-source-googlemaps-static`,
+      options: {
+          key: process.env.GOOGLE_MAPS_STATIC_API_KEY,
+          
+          styles: [
+              {
+                  feature: `poi`,
+                  element: `labels`,
+                  rules: {
+                      visibility: `off`,
+                  },
+              },
+          ],
+          maps: [
+            {
+                center: "-15,79549,-47,892677",
+                nickname: `Asa Sul`,
+                
+            },
+            {
+                center: "-15,718717,-47,886733",
+                nickname: `Lago Norte`,
+                
+            },
+          ],
       },
     },
     {

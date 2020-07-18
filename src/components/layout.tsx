@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import Header from "./header";
 import Footer from "./footer";
 
-const Layout = ({ children, ...rest }) => {
+const Layout = ({ children, page, ...rest }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -21,7 +21,7 @@ const Layout = ({ children, ...rest }) => {
       
       <div className="relative overflow-x-hidden">
         <main>{children}</main>
-        <Footer />
+        <Footer data={data} page={page} />
       </div>
     </div>
   )

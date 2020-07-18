@@ -386,4 +386,81 @@ a#anchorBtn {
 
   
 
-} // Fim
+} // Fim blog front
+
+#central-de-atendimento {
+  h1.titulo {
+    @apply font-display text-corpus-blue-600 text-4xl font-medium -ml-1 mb-2;
+  }
+  p {
+    @apply font-body font-light tracking-wide text-justify leading-relaxed;
+    a {
+      @apply relative text-corpus-orange-500 text-center;
+      z-index: 500;
+      transition:  0.35s ease-in-out;
+      transition-property: all;
+      &:hover {
+        @apply text-corpus-blue-600 underline;
+      }
+    }
+    strong {
+      @apply text-corpus-blue-500 font-medium;
+    }
+  }
+
+  .unidade {
+    &__endereco {
+      p {
+        @apply font-body text-corpus-grayish-blue-800;
+
+        .tag {
+          @apply font-semibold ;
+        }
+      }
+
+      p:first-of-type {
+        @apply w-4/6;
+      }
+    }
+  }
+
+  .mapa {
+    &__link {
+      h3, p {
+        transition: color .2s ease-in-out;
+      }
+      p {
+        @apply font-display text-gray-600 text-xs;
+        span {
+          @apply text-corpus-grayish-blue-900 font-medium mr-1;
+        }
+      }
+    }
+    &__link:hover {
+      
+        h3 {
+          @apply text-corpus-blue-500;
+        }
+        p {
+          @apply text-corpus-grayish-blue-800;
+        }
+    }
+    .placa {
+      @apply opacity-0;
+      transition: all .25s ease-in-out;
+    }
+    .dot {
+      @apply bg-corpus-baby-blue-600 border-corpus-blue-400 ;
+      transition: all .25s ease-in-out;
+    }
+    &:focus-within, &:hover {
+      .placa {
+        @apply opacity-100;
+      }
+      .dot {
+        @apply bg-corpus-orange-500 border-corpus-orange-600;
+      }
+    }
+  }
+
+}

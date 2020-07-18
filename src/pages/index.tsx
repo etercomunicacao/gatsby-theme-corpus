@@ -13,7 +13,7 @@ import '../styles/layout.scss';
 import BlogFrontPage from "./sections/blog-front";
 
 const IndexPage = ({ data }) => (
-  <Layout>
+  <Layout page="index">
     <SEO title="Home" />
     <Hero data={ data } />
     <Fisioterapia data={ data } />

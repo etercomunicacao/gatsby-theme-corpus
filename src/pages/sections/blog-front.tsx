@@ -83,8 +83,8 @@ export default function BlogFrontPage(props) {
   const { Posts, Destaque } = data
 
   return (
-    <section id="blog" className="blog blog__frontpage relative w-screen h-auto py-64 bg-corpus-grayish-blue-800 ">
-      <div id="spacer" className="shadow-xl bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
+    <section id="blog" className="blog blog__frontpage relative w-screen h-auto py-72 bg-corpus-grayish-blue-800 ">
+      <div id="spacer" className="shadow bg-corpus-baby-blue-200 order-1 lg:absolute z-0 inset-x-0 top-0 w-screen h-24 lg:h-64" />
       <div className="container mx-auto">
         <h1 className="font-display font-medium text-4xl text-corpus-beige-300 font-thin w-full text-shadow">Blog da Corpus</h1>
         <div className="mt-10 w-full">
