@@ -389,8 +389,9 @@ a#anchorBtn {
 } // Fim blog front
 
 #central-de-atendimento {
-  h1.titulo {
+  .titulo {
     @apply font-display text-corpus-blue-600 text-4xl font-medium -ml-1 mb-2;
+    
   }
   p {
     @apply font-body font-light tracking-wide text-justify leading-relaxed;
@@ -409,6 +410,10 @@ a#anchorBtn {
   }
 
   .unidade {
+    @apply px-4 rounded mb-4;
+    &:hover, &:focus-within {
+      @apply bg-corpus-beige-200; 
+    }
     &__endereco {
       p {
         @apply font-body text-corpus-grayish-blue-800;
@@ -463,4 +468,144 @@ a#anchorBtn {
     }
   }
 
+  .tab {
+    @apply w-full overflow-hidden;
+
+    label {
+      @apply text-2xl font-display px-2 font-medium rounded text-corpus-blue-600 relative leading-tight;  
+      transition: all .25s ease-in-out;
+      span.crefito {
+        @apply font-display text-sm text-corpus-grayish-blue-600 uppercase;
+      }
+      span.clique {
+        @apply opacity-0 font-body text-sm font-normal text-corpus-orange-500 absolute top-0 mt-6 right-0 mr-12 text-right;
+        transition: all .25s ease-in-out;
+      }
+      &:hover, &:focus-within {
+        @apply cursor-pointer bg-corpus-beige-400;
+        label::after {
+          @apply bg-corpus-blue-400;
+        }
+        span.clique {
+          @apply opacity-100;
+        }
+      }  
+    }
+
+  }
+  .tab-content {
+    @apply overflow-hidden;
+    max-height: 0;
+    -webkit-transition: max-height .35s;
+    -o-transition: max-height .35s;
+    transition: max-height .35s;
+    }
+    /* :checked - resize to full height */
+    .tab input:checked ~ .tab-content {
+    max-height: 100vh;
+    }
+    /* Label formatting when open */
+    .tab input:checked + label{
+    
+    }
+    /* Icon */
+    .tab label::after {
+    @apply ml-auto top-1/2 mr-2 right-0 absolute w-8 h-8 -mt-3 block leading-normal text-xl text-center;
+    
+    -webkit-transition: all .35s;
+    -o-transition: all .35s;
+    transition: all .35s;
+    }
+    /* Icon formatting - closed */
+    .tab input[type=checkbox] + label::after {
+    content: "+";
+    font-weight:bold; /*.font-bold*/
+    border-width: 1px; /*.border*/
+    border-radius: 9999px; /*.rounded-full */
+    border-color: #b8c2cc; /*.border-grey*/
+    }
+    .tab input[type=radio] + label::after {
+    content: "\25BE";
+    font-weight:bold; /*.font-bold*/
+    border-width: 1px; /*.border*/
+    border-radius: 9999px; /*.rounded-full */
+    border-color: #b8c2cc; /*.border-grey*/
+    }
+    /* Icon formatting - open */
+    .tab input[type=checkbox]:checked + label::after {
+    transform: rotate(315deg);
+    @apply bg-corpus-blue-500 text-white;
+    color: #f8fafc; /*.text-grey-lightest*/
+    }
+    .tab input[type=radio]:checked + label::after {
+    transform: rotateX(180deg);
+    @apply bg-corpus-blue-500 text-white;
+    color: #f8fafc; /*.text-grey-lightest*/
+    }
+
 }
+
+.entre_em_contato {
+  h3.titulo {
+    @apply font-display text-corpus-blue-600 text-2xl font-medium -ml-1 mb-2;
+  }
+}
+
+.form {
+  .intro {
+    h2 {
+      @apply font-display text-3xl text-corpus-blue-500 font-medium;
+    }
+
+    p {
+      @apply font-body text-corpus-grayish-blue-800 leading-relaxed;  
+    }
+  }
+
+  label {
+    @apply font-display font-light tracking-wider text-corpus-blue-500 leading-relaxed mb-6;
+
+    &:first-of-type {
+      @apply mt-6;
+    }
+    .validacao {
+      @apply text-red-600 italic mt-1;
+    }
+    
+    &.select {
+      @apply flex flex-col;
+      select {
+        @apply flex-none w-auto mr-auto p-1 mt-1 border-b-1 border-corpus-blue-500;
+      }
+    }
+
+    
+    input:not([type="checkbox"]) {
+      box-shadow: none;
+      @apply border-b-1 border-t-0 border-l-0 border-r-0 border-corpus-blue-500 text-corpus-grayish-blue-500 rounded-none font-body text-lg;
+      &:focus {
+        @apply outline-none border-1 border-corpus-blue-300 text-corpus-grayish-blue-800;
+      }
+    }
+
+    textarea {
+      @apply w-full border-b-1 border-corpus-blue-500 p-2 text-lg text-corpus-grayish-blue-500;
+      &:focus {
+        @apply outline-none border-1 border-corpus-blue-300 text-corpus-grayish-blue-800; 
+      
+      }
+    }
+  } // label
+
+  button.submit {
+    @apply bg-corpus-blue-500 border-b-2 border-l-2 border-corpus-blue-600 text-white font-medium tracking-widest text-sm rounded-sm font-display uppercase p-2;
+    transition: all .025s ease-in-out;
+    &:hover, &:focus-within {
+      @apply bg-corpus-blue-600 border-b-0 border-l-0 border-r-2 border-t-2 border-corpus-blue-700;
+    }
+
+    &:focus {
+      @apply outline-none bg-corpus-blue-400;
+    }
+  } // button
+} // form
